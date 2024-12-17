@@ -79,10 +79,7 @@ public class PlayerController : MonoBehaviour
         if (timer >= shootCooldown)
         {
             _canShoot = true;
-            timer = 0;
         }
-
-        _canShoot = false;
 
     }
 
@@ -90,6 +87,9 @@ public class PlayerController : MonoBehaviour
     {
         if (_canShoot && _pullingDirection.magnitude > 0.5f)
         {
+            Debug.Log("Shoot!");
+            _canShoot = false;
+            timer = 0f;
             SpawnAmeba();
         }
     }
@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("Lever Released");
+            _pullingDirection = Vector2.zero;
             _isPullingLever = false;
         }
     }
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
         float elapsedTime = 0;
         float duration = 0.5f;
         Vector3 originalScale = ameba.transform.localScale;
-        Vector3 targetScale = Vector3.one * 0.2f;
+        Vector3 targetScale = Vector3.one * 1.5f;
         while (elapsedTime < duration)
         {
             ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
@@ -192,6 +193,8 @@ public class PlayerController : MonoBehaviour
         Destroy(ameba.GetComponent<FixedJoint2D>());
         // then shoot it in the direction of the lever
         ameba.GetComponent<Rigidbody2D>().AddForce(_pullingDirection * pullingForce * pullingForce, ForceMode2D.Impulse);
+        // make sure the ameba will stay with that force without being affected
+        ameba.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     #endregion
