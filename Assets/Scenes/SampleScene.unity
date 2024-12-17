@@ -654,7 +654,7 @@ MonoBehaviour:
   lineStartColor: {r: 0, g: 1, b: 1, a: 1}
   lineEndColor: {r: 0, g: 0, b: 1, a: 1}
   amebaPrefab: {fileID: 1446422144751793218, guid: 72de507d60c5a4095adb1c2d080fd108, type: 3}
-  shootCooldown: 5
+  shootCooldown: 3
 --- !u!1 &425728225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 579003789937955966, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
