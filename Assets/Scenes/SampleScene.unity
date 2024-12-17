@@ -171,7 +171,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &3321729
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &3321730
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.828427
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &3321731
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &184817927
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &184817928
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 3
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &184817929
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653f1bcd223a0431190fb001d38994c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  speed: 10
   pullingForce: 3
   lineStartWidth: 0.4
   lineEndWidth: 0.2
@@ -707,7 +707,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &425728228
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &425728229
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.828427
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &425728230
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &505586666
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -862,7 +862,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &505586667
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -883,7 +883,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.828427
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &505586668
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1240,7 +1240,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &761235998
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &761235999
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1282,7 +1282,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 2.828427
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &761236000
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1139075466
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1417,7 +1417,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1139075467
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1438,7 +1438,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 3
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &1139075468
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1552,7 +1552,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1454958557
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1573,7 +1573,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1454958558
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1594,7 +1594,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 3
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &1454958559
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1708,7 +1708,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1524258096
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1729,7 +1729,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 3
+  m_Frequency: 1
 --- !u!231 &1524258097
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1750,7 +1750,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 3
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!232 &1524258098
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -2032,6 +2032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node6
       objectReference: {fileID: 0}
+    - target: {fileID: 76441051871111588, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
+      objectReference: {fileID: 0}
     - target: {fileID: 289492613284371049, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 2.828427
@@ -2055,6 +2059,10 @@ PrefabInstance:
     - target: {fileID: 579003789937955966, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
       value: Node4
+      objectReference: {fileID: 0}
+    - target: {fileID: 579003789937955966, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
       objectReference: {fileID: 0}
     - target: {fileID: 672549054441389203, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
@@ -2092,6 +2100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node2
       objectReference: {fileID: 0}
+    - target: {fileID: 926239446784684106, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
+      objectReference: {fileID: 0}
     - target: {fileID: 937559771806541747, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 2.828427
@@ -2107,6 +2119,10 @@ PrefabInstance:
     - target: {fileID: 1092381272519588776, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
       value: Node7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092381272519588776, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
       objectReference: {fileID: 0}
     - target: {fileID: 1343434988556331858, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
@@ -2148,8 +2164,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node3
       objectReference: {fileID: 0}
+    - target: {fileID: 2292620767223128308, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
+      objectReference: {fileID: 0}
     - target: {fileID: 2497375280415287091, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497375280415287091, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2535821018230642094, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -2226,19 +2250,19 @@ PrefabInstance:
       objectReference: {fileID: 6771951296194924804, guid: df56265f4bab14606b1f56c7901f0470, type: 3}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Color.a
-      value: 0.7607843
+      value: 0.40392157
       objectReference: {fileID: 0}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.754717
       objectReference: {fileID: 0}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Color.g
-      value: 0.66721255
+      value: 0.65142024
       objectReference: {fileID: 0}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Color.r
-      value: 0.023584902
+      value: 0.4521182
       objectReference: {fileID: 0}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Enabled
@@ -2308,6 +2332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node1
       objectReference: {fileID: 0}
+    - target: {fileID: 6528186682067407865, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
+      objectReference: {fileID: 0}
     - target: {fileID: 6612568616758672148, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 3
@@ -2327,6 +2355,10 @@ PrefabInstance:
     - target: {fileID: 7052202152697193926, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
       value: Node8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052202152697193926, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
       objectReference: {fileID: 0}
     - target: {fileID: 7265886447727547915, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
@@ -2423,6 +2455,10 @@ PrefabInstance:
     - target: {fileID: 9050461050868600891, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
       value: Node5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050461050868600891, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_TagString
+      value: Node
       objectReference: {fileID: 0}
     - target: {fileID: 9067416570090749734, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Radius

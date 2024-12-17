@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 655173853432201761}
   - component: {fileID: -4611331161751390864}
   - component: {fileID: 7218237731260170290}
+  - component: {fileID: -5472703411944883157}
   m_Layer: 0
   m_Name: Ameba
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7290175507582745486, guid: 592eaeb5a4e0c4e87a3c8b9242bedce6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,3 +153,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
+--- !u!114 &-5472703411944883157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446422144751793218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01278e16908d4703885de69dec9bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  noiseIntensity: 1
+  sinCosSpeed: 10
+  sinCosAmplitude: 0.3
