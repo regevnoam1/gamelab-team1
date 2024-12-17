@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BaseEnemyController : MonoBehaviour
 {
@@ -36,10 +38,12 @@ public class BaseEnemyController : MonoBehaviour
     }
     
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another collider/rigidbody
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ameba")) // If the other GameObject has the "Player" tag
         {
+            // make rigidbody kinematic
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             Die(); // Call the Die method
         }
     }
@@ -49,7 +53,30 @@ public class BaseEnemyController : MonoBehaviour
         // Play the death effect at the enemy's position
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         
+        // turn off the enemy sprite
+        GetComponent<SpriteRenderer>().enabled = false;
+        
         // Destroy the enemy GameObject
+        StartCoroutine(DelayDestroy());
+        StartCoroutine(EnlargeLightRadius());
+    }
+
+    private IEnumerator EnlargeLightRadius()
+    {
+        // Get the Light2D component attached to the enemy
+        var light = GetComponent<Light2D>();
+        
+        // Increase the light's radius over time
+        while (light.pointLightOuterRadius < 10)
+        {
+            light.pointLightOuterRadius += 0.1f;
+            yield return null;
+        }
+    }
+
+    private IEnumerator DelayDestroy()
+    {
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 }

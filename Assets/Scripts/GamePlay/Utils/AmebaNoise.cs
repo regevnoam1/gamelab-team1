@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GamePlay.Utils
 {
@@ -33,6 +35,14 @@ namespace GamePlay.Utils
 
             // Update the object's scale
             transform.localScale = new Vector3(finalScaleX, finalScaleY, scale);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
