@@ -1,5 +1,6 @@
 using System.Collections;
 using Core.Managers;
+using GamePlay.Controllers;
 using GamePlay.Utils;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -66,7 +67,13 @@ public class BaseEnemyController : MonoBehaviour
         gameObject.transform.parent = player.transform;
 
         enemySpeed *= 1.5f;
-        
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            Color lightRed = new Color(1f, 0.58f, 0.53f);
+            playerController.ChangeColorTemporarily(lightRed, 1f);
+        }
+
         transform.localScale = Vector2.one * Mathf.Max(transform.localScale.x, transform.localScale.y);
         
         // Move the enemy towards the player

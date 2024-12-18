@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.U2D;
 
 namespace GamePlay.Controllers
 {
@@ -196,5 +197,55 @@ namespace GamePlay.Controllers
         }
 
         #endregion
+        
+        public void ChangeColorTemporarily(Color color, float duration)
+        {
+            // Find the child GameObject with the SpriteShapeRenderer
+            SpriteShapeRenderer spriteShapeRenderer = GetComponentInChildren<SpriteShapeRenderer>();
+            if (spriteShapeRenderer == null)
+            {
+                Debug.LogWarning("SpriteShapeRenderer not found on the player's child!");
+                return;
+            }
+
+            // Start the coroutine to change the color temporarily
+            StartCoroutine(ChangeSpriteShapeColorCoroutine(spriteShapeRenderer, color, duration));
+        }
+
+        private IEnumerator ChangeSpriteShapeColorCoroutine(SpriteShapeRenderer spriteShapeRenderer, Color color, float duration)
+        {
+            // Get the fill material from the SpriteShapeRenderer
+            Material fillMaterial = spriteShapeRenderer.materials[0];
+
+            if (fillMaterial == null)
+            {
+                Debug.LogWarning("Fill material not found on the SpriteShapeRenderer!");
+                yield break;
+            }
+
+            // Store the original color of the fill material
+            Color originalColor = fillMaterial.color;
+
+            // Calculate the interval for each flash
+            int flashCount = 3; // Number of flashes
+            float interval = duration / (flashCount * 2); // Time per color change
+
+            for (int i = 0; i < flashCount; i++)
+            {
+                // Change to the specified color
+                fillMaterial.color = color;
+                yield return new WaitForSeconds(interval);
+
+                // Revert to the original color
+                fillMaterial.color = originalColor;
+                yield return new WaitForSeconds(interval);
+            }
+
+            // Ensure it ends with the original color
+            fillMaterial.color = originalColor;
+        }
+
+
+
     }
 }
