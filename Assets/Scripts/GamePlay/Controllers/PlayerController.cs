@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.U2D;
+using Core.Managers;
 
 namespace GamePlay.Controllers
 {
@@ -244,8 +245,6 @@ namespace GamePlay.Controllers
             // Ensure it ends with the original color
             fillMaterial.color = originalColor;
         }
-
-
 
     }
 }
