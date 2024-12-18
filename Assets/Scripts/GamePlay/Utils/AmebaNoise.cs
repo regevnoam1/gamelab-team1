@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,7 @@ namespace GamePlay.Utils
         void Start()
         {
             noiseOffset = Random.Range(0f, 100f); // Initialize Perlin noise offset
+            StartCoroutine(DelayDestroy());
         }
 
         void Update()
@@ -40,6 +42,15 @@ namespace GamePlay.Utils
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(gameObject);
+            }
+        }
+        
+        private IEnumerator DelayDestroy()
+        {
+            yield return new WaitForSeconds(0.6f);
+            if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.5f)
             {
                 Destroy(gameObject);
             }

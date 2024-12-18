@@ -1,4 +1,5 @@
 using System.Collections;
+using Core.Managers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -46,6 +47,32 @@ public class BaseEnemyController : MonoBehaviour
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             Die(); // Call the Die method
         }
+        
+        if (other.gameObject.CompareTag("Player")) // If the other GameObject has the "Player" tag
+        {
+            Debug.Log("Player hit by enemy");
+            GameManager.Instance.DecreaseLightRadius();
+            StartCoroutine(AttackPlayer());
+        }
+    }
+
+    private IEnumerator AttackPlayer()
+    {
+        // Get the player's position
+        var playerPosition = player.transform.position;
+        
+        // Move the enemy towards the player
+        while (Vector3.Distance(transform.position, playerPosition) > 0.01f)
+        {
+            if (Vector3.Distance(transform.position, playerPosition) < 0.5f)
+            {
+                transform.localScale -= Time.deltaTime * Vector3.one;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, playerPosition, enemySpeed * Time.deltaTime);
+            yield return null;
+        }
+        
+        Destroy(gameObject);
     }
 
     private void Die()

@@ -171,7 +171,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &3321729
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &3321730
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3321726}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -269,7 +269,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &3321734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 326971482555319445, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -389,7 +389,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &184817927
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &184817928
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184817924}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -487,7 +487,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &184817932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1693931230920053803, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -533,7 +533,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_Radius: 1.5
 --- !u!50 &288427870 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4352280084607768956, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -769,7 +769,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &425728228
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -790,7 +790,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &425728229
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -798,7 +798,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425728225}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -867,7 +867,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &425728233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 25337056715727009, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -903,7 +903,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &505586666
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -924,7 +924,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &505586667
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -932,7 +932,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505586663}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -1028,7 +1028,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &761235998
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1340,7 +1340,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &761235999
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1348,7 +1348,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761235995}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -1417,7 +1417,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &761236003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 674583031312440699, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -1783,7 +1783,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1139075466
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1804,7 +1804,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1139075467
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1812,7 +1812,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139075463}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -1881,7 +1881,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &1139075471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 539273005138382711, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -2080,7 +2080,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1454958557
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2101,7 +2101,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1454958558
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2109,7 +2109,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454958554}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -2178,7 +2178,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &1454958562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8487800226640471268, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -2236,7 +2236,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1524258096
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2257,7 +2257,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 4.2426405
   m_DampingRatio: 0
-  m_Frequency: 2
+  m_Frequency: 1.5
 --- !u!231 &1524258097
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2265,7 +2265,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524258093}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 288427870}
@@ -2334,7 +2334,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.3
+  m_Radius: 2
 --- !u!4 &1524258101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5966086677573855014, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
@@ -2964,6 +2964,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2497375280415287091, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2497375280415287091, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -3057,7 +3061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5966086677573855014, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_LocalPosition.x
