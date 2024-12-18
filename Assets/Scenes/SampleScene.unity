@@ -1577,6 +1577,10 @@ PrefabInstance:
       propertyPath: m_Frequency
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5680208972907140641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6016461715266464601, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
