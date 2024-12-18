@@ -35,6 +35,7 @@ namespace GamePlay.Controllers
         private float timer = 0f;
         [SerializeField] private float shootCooldown = 5f;
         private Gamepad _pad;
+        [SerializeField] private AudioSource audioSource;
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -42,7 +43,6 @@ namespace GamePlay.Controllers
         {
             // Initialize Rigidbody2D
             _rb = GetComponent<Rigidbody2D>();
-
             // Initialize LineRenderer
             _lineRenderer = gameObject.AddComponent<LineRenderer>();
             ConfigureTriangle();
@@ -214,7 +214,8 @@ namespace GamePlay.Controllers
         }
 
         private IEnumerator ChangeSpriteShapeColorCoroutine(SpriteShapeRenderer spriteShapeRenderer, Color color, float duration)
-        {
+        { 
+            audioSource.Play();
             RumbleManager.instance.Rumble(0.25f,1f,0.25f);
             // Get the fill material from the SpriteShapeRenderer
             Material fillMaterial = spriteShapeRenderer.materials[0];

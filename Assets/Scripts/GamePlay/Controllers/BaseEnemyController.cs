@@ -13,10 +13,12 @@ public class BaseEnemyController : MonoBehaviour
     [SerializeField] private GameObject deathEffect; // Particle effect to play when the enemy dies
     [SerializeField]
     private float angleOffset;
+    private AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         player = GameObject.Find("Player"); // Find the player GameObject by name
     }
 
@@ -70,6 +72,7 @@ public class BaseEnemyController : MonoBehaviour
         if (other.gameObject.CompareTag("Ameba")) // If the other GameObject has the "Player" tag
         {
             // make rigidbody kinematic
+            audioSource.Play();
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             Die(); // Call the Die method
         }
@@ -112,6 +115,7 @@ public class BaseEnemyController : MonoBehaviour
 
     private void Die()
     {
+        
         // Play the death effect at the enemy's position
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         
