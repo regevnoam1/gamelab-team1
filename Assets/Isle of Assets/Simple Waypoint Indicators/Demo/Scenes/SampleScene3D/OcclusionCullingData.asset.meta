@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2617bad51f700444aadc21be47c6685a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 36300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 232484
+  packageName: Simple Waypoint Indicators
+  packageVersion: 1.0.3
+  assetPath: Assets/Isle of Assets/Simple Waypoint Indicators/Demo/Scenes/SampleScene3D/OcclusionCullingData.asset
+  uploadId: 620728

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 91c3e3909e0254943b240e034c2f7f3f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 232484
+  packageName: Simple Waypoint Indicators
+  packageVersion: 1.0.3
+  assetPath: Assets/Isle of Assets/Simple Waypoint Indicators/Demo/Scripts/PlayerController.cs
+  uploadId: 620728
