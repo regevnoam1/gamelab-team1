@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 790515199}
   - component: {fileID: 790515201}
   - component: {fileID: 790515200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,10 +780,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 528069385379ee249b19302051ed2255, type: 3}
-  m_Resource: {fileID: 8300000, guid: 528069385379ee249b19302051ed2255, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 55e059abf96ae8f46b1f40950fd6e109, type: 3}
+  m_Resource: {fileID: 8300000, guid: 55e059abf96ae8f46b1f40950fd6e109, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 1416732807}
   - component: {fileID: 1416732809}
   - component: {fileID: 1416732808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 1660307898}
   - component: {fileID: 1660307900}
   - component: {fileID: 1660307899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ GameObject:
   - component: {fileID: 2122441910}
   - component: {fileID: 2122441912}
   - component: {fileID: 2122441911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}

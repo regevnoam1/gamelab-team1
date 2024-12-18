@@ -15,7 +15,7 @@ namespace GamePlay.Controllers
         private IEnumerator DelayDestroy()
         {
             yield return new WaitForSeconds(0.6f);
-            if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 3f)
+            if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 10f)
             {
                 Destroy(gameObject);
             }

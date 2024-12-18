@@ -89,7 +89,10 @@ public class BaseEnemyController : MonoBehaviour
     private IEnumerator AttackPlayer()
     {
         // Get the player's position
-        gameObject.GetComponent<Noise>().enabled = false;
+        if (gameObject.GetComponent<Noise>() != null)
+        {
+            gameObject.GetComponent<Noise>().enabled = false;
+        }
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         gameObject.transform.parent = player.transform;
 
@@ -97,8 +100,23 @@ public class BaseEnemyController : MonoBehaviour
         PlayerController playerController = player.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            Color lightRed = new Color(1f, 0.58f, 0.53f);
-            playerController.ChangeColorTemporarily(lightRed, 1f);
+            Color blinkColor;
+            if (gameObject.name.Contains("Pink"))
+            {
+                blinkColor = new Color(1f, 0.58f, 0.53f);
+            }
+            else if (gameObject.name.Contains("Alliance"))
+            {
+                // blink is light orange-yellow
+                blinkColor = new Color(1f, 0.92f, 0.53f);
+            }
+            else
+            {
+                // blink is light blue
+                blinkColor = new Color(0.53f, 0.92f, 1f);
+            }
+            
+            playerController.ChangeColorTemporarily(blinkColor, 1f);
         }
 
         transform.localScale = Vector2.one * Mathf.Max(transform.localScale.x, transform.localScale.y);
