@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7218237731260170290}
   - component: {fileID: -5472703411944883157}
   - component: {fileID: 5685851746946592159}
+  - component: {fileID: 5036832472028602682}
   m_Layer: 0
   m_Name: Ameba
   m_TagString: Ameba
@@ -222,3 +223,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &5036832472028602682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446422144751793218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc9e61e0b5184f4ebc3d236913168db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,6 +13,8 @@ namespace Core.Managers
         
         private GameObject player; // Reference to the player GameObject
         
+        [SerializeField] private Light2D playerLight; // Reference to the player's light
+        
         #endregion
     
         #region MonoBehaviour Callbacks
@@ -38,26 +40,24 @@ namespace Core.Managers
 
         public void EnlargeLightRadius()
         {
-            var light2D = player.GetComponentInChildren<Light2D>();
-            StartCoroutine(ChangeRadius(light2D, 0.2f));
+            StartCoroutine(ChangeRadius(0.5f));
         }
         
         public void DecreaseLightRadius()
         {
-            var light2D = player.GetComponentInChildren<Light2D>();
-            StartCoroutine(ChangeRadius(light2D, -0.2f));
+            StartCoroutine(ChangeRadius(-0.5f));
         }
     
         #endregion
 
         #region Other Methods
 
-        private IEnumerator ChangeRadius(Light2D light2D, float f)
+        private IEnumerator ChangeRadius(float f)
         {
-            var initialRadius = light2D.pointLightOuterRadius;
-            while (light2D.pointLightOuterRadius < initialRadius + f)
+            var initialRadius = playerLight.pointLightOuterRadius;
+            while (Mathf.Abs(playerLight.pointLightOuterRadius - (initialRadius + f)) >= 0.01f)
             {
-                light2D.pointLightOuterRadius += Time.deltaTime;
+                playerLight.pointLightOuterRadius += Time.deltaTime * f;
                 yield return null;
             }
         }

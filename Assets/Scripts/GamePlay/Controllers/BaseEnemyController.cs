@@ -1,5 +1,6 @@
 using System.Collections;
 using Core.Managers;
+using GamePlay.Utils;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -48,9 +49,10 @@ public class BaseEnemyController : MonoBehaviour
             Die(); // Call the Die method
         }
         
-        if (other.gameObject.CompareTag("Player")) // If the other GameObject has the "Player" tag
+        if (other.gameObject.CompareTag("Node")) // If the other GameObject has the "Node" tag
         {
             Debug.Log("Player hit by enemy");
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
             GameManager.Instance.DecreaseLightRadius();
             StartCoroutine(AttackPlayer());
         }
@@ -59,16 +61,17 @@ public class BaseEnemyController : MonoBehaviour
     private IEnumerator AttackPlayer()
     {
         // Get the player's position
-        var playerPosition = player.transform.position;
+        gameObject.GetComponent<Noise>().enabled = false;
+        gameObject.transform.parent = player.transform;
+
+        enemySpeed *= 1.5f;
+        
+        transform.localScale = Vector2.one * Mathf.Max(transform.localScale.x, transform.localScale.y);
         
         // Move the enemy towards the player
-        while (Vector3.Distance(transform.position, playerPosition) > 0.01f)
+        while (transform.localScale.x > 0.01f)
         {
-            if (Vector3.Distance(transform.position, playerPosition) < 0.5f)
-            {
-                transform.localScale -= Time.deltaTime * Vector3.one;
-            }
-            transform.position = Vector3.MoveTowards(transform.position, playerPosition, enemySpeed * Time.deltaTime);
+            transform.localScale -= Vector3.one * Time.deltaTime;
             yield return null;
         }
         
@@ -78,7 +81,7 @@ public class BaseEnemyController : MonoBehaviour
     private void Die()
     {
         // Play the death effect at the enemy's position
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        deathEffect.SetActive(true);
         
         // turn off the enemy sprite
         GetComponent<SpriteRenderer>().enabled = false;
