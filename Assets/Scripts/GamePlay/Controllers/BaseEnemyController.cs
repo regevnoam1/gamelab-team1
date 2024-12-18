@@ -117,6 +117,10 @@ public class BaseEnemyController : MonoBehaviour
         
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
         
         // Destroy the enemy GameObject
         StartCoroutine(DelayDestroy());
