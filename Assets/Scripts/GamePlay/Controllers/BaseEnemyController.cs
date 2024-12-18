@@ -22,6 +22,17 @@ public class BaseEnemyController : MonoBehaviour
     void Update()
     {
         TryMoveTowardsPlayer(); // Attempt to move towards the player
+        
+        // look at player when y is the front
+        Vector3 target = player.transform.position;
+        target.z = 0;
+        Vector3 objectPos = transform.position;
+        target.x = target.x - objectPos.x;
+        target.y = target.y - objectPos.y - 42.5f;
+        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        
+        
     }
 
     private void TryMoveTowardsPlayer()
