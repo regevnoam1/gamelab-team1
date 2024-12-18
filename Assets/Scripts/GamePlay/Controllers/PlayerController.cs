@@ -9,7 +9,11 @@ namespace GamePlay.Controllers
     public class PlayerController : MonoBehaviour
     {
         #region Fields
-
+        [SerializeField] private GameObject trianglePrefab; // Drag and drop a prefab in the inspector
+        private GameObject _triangleInstance;
+        [SerializeField] private float triangleDistance = 0.5f; // Distance from player to triangle
+        [SerializeField] private float triangleSize = 1f; // Size of the triangle
+        
         // Movement variables
         private Vector2 _movement;
         [SerializeField]
@@ -44,7 +48,7 @@ namespace GamePlay.Controllers
 
             // Initialize LineRenderer
             _lineRenderer = gameObject.AddComponent<LineRenderer>();
-            ConfigureLineRenderer();
+            ConfigureTriangle();
 
             // Add points from the children if their tag is "Point"
             StartCoroutine(InitPoints());
@@ -100,7 +104,7 @@ namespace GamePlay.Controllers
             // Update LineRenderer to show the ray
             if (_isPullingLever)
             {
-                UpdateLineRenderer();
+                UpdateTriangle();
             }
             else
             {
@@ -144,28 +148,26 @@ namespace GamePlay.Controllers
     
         #endregion
 
-        #region LineRenderer
-        private void ConfigureLineRenderer()
+        #region Triangle Indicator
+        private void ConfigureTriangle()
         {
-            _lineRenderer.startWidth = lineStartWidth;
-            _lineRenderer.endWidth = lineEndWidth;
-
-            _lineRenderer.startColor = lineStartColor;
-            _lineRenderer.endColor = lineEndColor;
-
-            _lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            if (trianglePrefab != null)
+            {
+                _triangleInstance = Instantiate(trianglePrefab, transform.position, Quaternion.identity);
+                _triangleInstance.SetActive(false); // Initially hide the triangle
+            }
         }
 
-        private void UpdateLineRenderer()
+        private void UpdateTriangle()
         {
-            // Enable the LineRenderer
-            _lineRenderer.enabled = true;
+            if (_triangleInstance == null) return;
 
-            // Set the positions of the line
-            Vector3 startPosition = transform.position;
-            Vector3 endPosition = transform.position + (Vector3)(_pullingDirection * pullingForce);
-            _lineRenderer.SetPosition(0, startPosition);
-            _lineRenderer.SetPosition(1, endPosition);
+            _triangleInstance.SetActive(true);
+
+            // Set position and rotation
+            _triangleInstance.transform.position = transform.position + (Vector3)(_pullingDirection.normalized * triangleSize);
+            float angle = Mathf.Atan2(_pullingDirection.y, _pullingDirection.x) * Mathf.Rad2Deg;
+            _triangleInstance.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         }
 
         private void SpawnAmeba()
