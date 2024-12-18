@@ -70,7 +70,6 @@ public class BaseEnemyController : MonoBehaviour
         PlayerController playerController = player.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            RumbleManager.instance.Rumble(0.25f,1f,0.25f);
             Color lightRed = new Color(1f, 0.58f, 0.53f);
             playerController.ChangeColorTemporarily(lightRed, 1f);
         }

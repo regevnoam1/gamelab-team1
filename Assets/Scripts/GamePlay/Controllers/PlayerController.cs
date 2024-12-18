@@ -34,7 +34,7 @@ namespace GamePlay.Controllers
         private bool _canShoot = true;
         private float timer = 0f;
         [SerializeField] private float shootCooldown = 5f;
-
+        private Gamepad _pad;
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -215,6 +215,7 @@ namespace GamePlay.Controllers
 
         private IEnumerator ChangeSpriteShapeColorCoroutine(SpriteShapeRenderer spriteShapeRenderer, Color color, float duration)
         {
+            Rumble(0.25f,1f,0.25f);
             // Get the fill material from the SpriteShapeRenderer
             Material fillMaterial = spriteShapeRenderer.materials[0];
 
@@ -245,6 +246,24 @@ namespace GamePlay.Controllers
             // Ensure it ends with the original color
             fillMaterial.color = originalColor;
         }
-
+        public void Rumble(float lowFrequency, float highFrequency, float duration)
+        {
+            _pad = Gamepad.current;
+            if (_pad != null)
+            {
+                _pad.SetMotorSpeeds(lowFrequency, highFrequency);
+            }
+            StartCoroutine(StopRumble(duration,_pad));
+        }
+        private IEnumerator StopRumble(float duration, Gamepad pad)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            pad.SetMotorSpeeds(0f,0f);
+        }
     }
 }
