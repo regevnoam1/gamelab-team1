@@ -11,7 +11,7 @@ namespace GamePlay.Controllers
         #region Fields
         [SerializeField] private GameObject trianglePrefab; // Drag and drop a prefab in the inspector
         private GameObject _triangleInstance;
-        [SerializeField] private float triangleDistance = 0.5f; // Distance from player to triangle
+        [SerializeField] private float triangleDistance = 2f; // Distance from player to triangle
         [SerializeField] private float triangleSize = 1f; // Size of the triangle
         
         // Movement variables
@@ -26,11 +26,6 @@ namespace GamePlay.Controllers
 
         // LineRenderer configuration
         private LineRenderer _lineRenderer;
-        [Header("Line Renderer Settings")]
-        [SerializeField] private float lineStartWidth = 0.4f;
-        [SerializeField] private float lineEndWidth = 0.2f;
-        [SerializeField] private Color lineStartColor = Color.cyan;
-        [SerializeField] private Color lineEndColor = Color.blue;
         [SerializeField] private GameObject amebaPrefab;
     
         // Shooting parameters
@@ -108,7 +103,7 @@ namespace GamePlay.Controllers
             }
             else
             {
-                _lineRenderer.enabled = false;
+                _triangleInstance.SetActive(false);
             }
         }
 
@@ -165,7 +160,7 @@ namespace GamePlay.Controllers
             _triangleInstance.SetActive(true);
 
             // Set position and rotation
-            _triangleInstance.transform.position = transform.position + (Vector3)(_pullingDirection.normalized * triangleSize);
+            _triangleInstance.transform.position = transform.position + (Vector3)(_pullingDirection.normalized * triangleDistance);
             float angle = Mathf.Atan2(_pullingDirection.y, _pullingDirection.x) * Mathf.Rad2Deg;
             _triangleInstance.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         }

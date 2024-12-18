@@ -1425,6 +1425,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -59.6
       objectReference: {fileID: 0}
+    - target: {fileID: 386528130184469951, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
+      objectReference: {fileID: 0}
     - target: {fileID: 503046060239749413, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 2.1213202
@@ -1489,6 +1493,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2348892057743963595, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
+      objectReference: {fileID: 0}
     - target: {fileID: 2497375280415287091, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1545,6 +1553,10 @@ PrefabInstance:
       propertyPath: m_Frequency
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5379479764084188173, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
+      objectReference: {fileID: 0}
     - target: {fileID: 5568760759984948787, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 2
@@ -1552,6 +1564,10 @@ PrefabInstance:
     - target: {fileID: 5568760759984948787, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Frequency
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584980250643362641, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
       objectReference: {fileID: 0}
     - target: {fileID: 5657880898032750302, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
@@ -1613,6 +1629,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6081426992362180977, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
+      objectReference: {fileID: 0}
     - target: {fileID: 6276242719759820775, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Distance
       value: 2.1213202
@@ -1620,6 +1640,10 @@ PrefabInstance:
     - target: {fileID: 6276242719759820775, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Frequency
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304243627433524475, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
       objectReference: {fileID: 0}
     - target: {fileID: 6528186682067407865, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Layer
@@ -1653,6 +1677,14 @@ PrefabInstance:
       propertyPath: pullingForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6949889305071669598, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: trianglePrefab
+      value: 
+      objectReference: {fileID: 6712301225976464861, guid: 70d0d223fa948f345899b35f1a5cbde8, type: 3}
+    - target: {fileID: 6949889305071669598, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: triangleDistance
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7052202152697193926, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1672,6 +1704,14 @@ PrefabInstance:
     - target: {fileID: 7704786070756714688, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_Frequency
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8062014857703160775, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140810936031932645, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
+      propertyPath: m_Distance
+      value: 1.118034
       objectReference: {fileID: 0}
     - target: {fileID: 8322278001250031654, guid: 02f16af1f41744337b385ed945cbef81, type: 3}
       propertyPath: m_PointLightOuterRadius
