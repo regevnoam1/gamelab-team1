@@ -8,7 +8,6 @@ namespace Core.Managers
     {
         public static RumbleManager instance;
         private Gamepad _pad;
-        private Coroutine _stopRumbleAfterTime;
         private void Awake()
         {
             if (instance == null)
@@ -23,7 +22,7 @@ namespace Core.Managers
             {
                 _pad.SetMotorSpeeds(lowFrequency, highFrequency);
             }
-            _stopRumbleAfterTime = StartCoroutine(StopRumble(duration,_pad));
+            StartCoroutine(StopRumble(duration,_pad));
         }
         private IEnumerator StopRumble(float duration, Gamepad pad)
         {
