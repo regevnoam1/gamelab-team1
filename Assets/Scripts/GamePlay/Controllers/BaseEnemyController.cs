@@ -82,10 +82,10 @@ public class BaseEnemyController : MonoBehaviour
     private void Die()
     {
         // Play the death effect at the enemy's position
-        deathEffect.SetActive(true);
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         
-        // turn off the enemy sprite
-        GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         
         // Destroy the enemy GameObject
         StartCoroutine(DelayDestroy());

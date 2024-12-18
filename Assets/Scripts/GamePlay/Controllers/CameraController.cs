@@ -9,6 +9,8 @@ namespace GamePlay.Controllers
         [SerializeField] private Vector3 offset = new Vector3(0, 0, -10); 
         [SerializeField] private float followSpeed = 5f; // Speed at which the camera follows
         [SerializeField] private bool maintainCameraRotation = true; // Keep the camera's rotation fixed
+        [SerializeField] Vector2 cameraVerticalBounds; // Bounds for the camera
+        [SerializeField] Vector2 cameraHorizontalBounds; // Bounds for the camera
         
         private float initialScale;
         
@@ -29,13 +31,14 @@ namespace GamePlay.Controllers
 
         void LateUpdate()
         {
-            // step back if the player scale is grow to a certain amount
-            
             if (playerTransform == null)
                 return;
 
+            
             // Compute the desired position
             Vector3 targetPosition = playerTransform.position + offset;
+            targetPosition.x = Mathf.Clamp(targetPosition.x, cameraHorizontalBounds.x, cameraHorizontalBounds.y);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, cameraVerticalBounds.x, cameraVerticalBounds.y);
 
             // Smoothly move the camera to the desired position
             transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
