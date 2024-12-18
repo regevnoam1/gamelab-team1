@@ -66,7 +66,7 @@ public class BaseEnemyController : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         gameObject.transform.parent = player.transform;
 
-        enemySpeed *= 1.5f;
+        enemySpeed *= 2f;
         PlayerController playerController = player.GetComponent<PlayerController>();
         if (playerController != null)
         {
@@ -79,7 +79,7 @@ public class BaseEnemyController : MonoBehaviour
         // Move the enemy towards the player
         while (transform.localScale.x > 0.01f)
         {
-            transform.localScale -= Vector3.one * Time.deltaTime * 2;
+            transform.localScale -= Vector3.one * Time.deltaTime * 8;
             yield return null;
         }
         
