@@ -16,6 +16,9 @@ namespace Core.Managers
         
         [SerializeField] private Light2D playerLight; // Reference to the player's light
 
+        [HideInInspector]
+        public float timer = 0f;
+        
         #endregion
     
         #region MonoBehaviour Callbacks
@@ -34,6 +37,11 @@ namespace Core.Managers
         void Start()
         {
             player = GameObject.Find("Player"); // Find the player GameObject by name
+        }
+        
+        private void Update()
+        {
+            timer += Time.deltaTime;
         }
 
         #endregion

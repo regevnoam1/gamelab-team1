@@ -11,7 +11,9 @@ public class BaseEnemyController : MonoBehaviour
 
     [SerializeField] private float enemySpeed = 2f; // Speed at which the enemy moves
     [SerializeField] private GameObject deathEffect; // Particle effect to play when the enemy dies
-    
+    [SerializeField]
+    private float angleOffset;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,17 +25,28 @@ public class BaseEnemyController : MonoBehaviour
     {
         TryMoveTowardsPlayer(); // Attempt to move towards the player
         
-        // look at player when y is the front
-        Vector3 target = player.transform.position;
-        target.z = 0;
-        Vector3 objectPos = transform.position;
-        target.x = target.x - objectPos.x;
-        target.y = target.y - objectPos.y - 42.5f;
-        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        
+        // Look at the player with an offset to the x-axis
+        LookAtPlayer();
         
     }
+    
+    private void LookAtPlayer()
+    {
+        if (player == null) return; // Ensure the player exists
+
+        // Get direction from enemy to player
+        Vector2 direction = (player.transform.position - transform.position).normalized;
+
+        // Calculate the angle in degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Apply the angle offset
+        angle += angleOffset;
+
+        // Set the enemy's rotation (only affects Z-axis for 2D)
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
 
     private void TryMoveTowardsPlayer()
     {

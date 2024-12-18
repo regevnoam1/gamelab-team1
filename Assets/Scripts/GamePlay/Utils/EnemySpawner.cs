@@ -1,3 +1,4 @@
+using Core.Managers;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -17,8 +18,16 @@ public class EnemySpawner : MonoBehaviour
         
         if (_spawnInterval <= 0)
         {
+            GameObject enemyPrefab;
             // Randomly select an enemy prefab from the array
-            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            if (GameManager.Instance.timer < 30)
+            {
+                enemyPrefab = enemyPrefabs[0];
+            }
+            else
+            {
+                enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            }
             
             // Instantiate the enemy prefab at the spawner's position
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
