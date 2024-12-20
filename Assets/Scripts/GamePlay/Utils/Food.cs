@@ -8,6 +8,7 @@ public class Food : MonoBehaviour
         if (other.gameObject.CompareTag("Node") || other.gameObject.CompareTag("Player"))
         {
             GameManager.Instance._attackLevel++;
+            GameManager.Instance.OnOnCollectPowerUp();
             Destroy(gameObject);
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,11 +32,19 @@ namespace GamePlay.Controllers
         [SerializeField] private GameObject amebaPrefab;
     
         // Shooting parameters
+        private readonly List<(GameObject ameba, float elapsedTime)> _activeAmebaScales = new List<(GameObject, float)>();
         private bool _canShoot = true;
         private float timer = 0f;
         [SerializeField] private float shootCooldown = 5f;
         private Gamepad _pad;
         [SerializeField] private AudioSource audioSource;
+        
+        // Snake Attack
+        private List<Vector3> _snakePositions = new List<Vector3>();
+        private List<GameObject> _snakeAmebas = new List<GameObject>();
+        private int _gap = 50;
+
+
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -49,6 +58,8 @@ namespace GamePlay.Controllers
 
             // Add points from the children if their tag is "Point"
             StartCoroutine(InitPoints());
+            
+            GameManager.Instance.OnCollectPowerUp += SnakeAttack;
         }
 
         private IEnumerator InitPoints()
@@ -68,13 +79,33 @@ namespace GamePlay.Controllers
             TryMove();
 
             TryRenderLine();
-        
-            TryShoot();
+
+            if (GameManager.Instance._attackName == "simple")
+            {
+                TryShoot();
+                UpdateScalingAmebas();
+            }
+            else if (GameManager.Instance._attackName == "snake")
+            {
+                UpdateSnakePositions();
+            }
 
             TickTok();
+
         }
 
-        
+        private void UpdateSnakePositions()
+        {
+            _snakePositions.Insert(0, transform.position);
+            int index = 0;
+            foreach (var ameba in _snakeAmebas)
+            {
+                Vector3 direction = _snakePositions[Mathf.Min(index * _gap, _snakePositions.Count - 1)];
+                ameba.transform.position = direction;
+                Debug.Log($"Ameba {index} position: {ameba.transform.position}");
+                index++;
+            }
+        }
 
         #endregion
 
@@ -134,52 +165,38 @@ namespace GamePlay.Controllers
             
             private void SpawnAmebas()
             {
-                List<GameObject> amebas = new List<GameObject>();
-                for (int i = 0; i < GameManager.Instance._attackLevel; i++)
-                {
-                    GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
-                    FixedJoint2D joint = ameba.AddComponent<FixedJoint2D>();
-                    joint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
-                    amebas.Add(ameba);
-                }
-
                 switch (GameManager.Instance._attackName)
                 {
                     case "simple":
-                        StartCoroutine(ShootSimple(amebas));
+                        List<GameObject> amebas = new List<GameObject>();
+                        for (int i = 0; i < Mathf.Min(5, GameManager.Instance._attackLevel); i++)
+                        {
+                            GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
+                            FixedJoint2D joint = ameba.AddComponent<FixedJoint2D>();
+                            joint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
+                            amebas.Add(ameba);
+                        }
+                        ShootSimple(amebas);
                         break;
                 }
                 
             }
 
-            private IEnumerator ShootSimple(List<GameObject> amebas)
+            private void SnakeAttack()
+            {
+                GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
+                _snakeAmebas.Add(ameba);
+            }
+            
+
+            private void ShootSimple(List<GameObject> amebas)
             {
                 // Generate shooting directions with even angles between them
                 int count = amebas.Count;
-                
-
-                // Iterate over each ameba to animate and shoot them
-                for (int i = 0; i < amebas.Count; i++)
-                {
-                    GameObject ameba = amebas[i];
-
-                    // Animate ameba (scaling up)
-                    float elapsedTime = 0f;
-                    float duration = 0.5f;
-                    Vector3 originalScale = ameba.transform.localScale;
-                    Vector3 targetScale = Vector3.one * 1.5f;
-
-                    while (elapsedTime < duration)
-                    {
-                        ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
-                        elapsedTime += Time.deltaTime;
-                        yield return null;
-                    }
-                }
 
                 Vector2[] directions = new Vector2[count];
                 float angleIncrement = 60f / count; // Evenly spaced angles in a circle
-                float mainAngle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg + (((float)amebas.Count / 2f) * angleIncrement); // Main movement angle
+                float mainAngle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg - (amebas.Count - 1) * angleIncrement / 2;
 
                 for (int i = 0; i < count; i++)
                 {
@@ -187,11 +204,14 @@ namespace GamePlay.Controllers
                     float radian = angle * Mathf.Deg2Rad;
                     directions[i] = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
                 }
-                
+
                 for (int i = 0; i < amebas.Count; i++)
                 {
                     GameObject ameba = amebas[i];
-                    
+
+                    // Start animation by adding the ameba to a list of active animations
+                    StartScalingAmeba(ameba);
+
                     // Detach the ameba from the player
                     Destroy(ameba.GetComponent<FixedJoint2D>());
 
@@ -204,6 +224,44 @@ namespace GamePlay.Controllers
                     }
                 }
             }
+            
+
+
+            private void StartScalingAmeba(GameObject ameba)
+            {
+                _activeAmebaScales.Add((ameba, 0f));
+            }
+
+            private void UpdateScalingAmebas()
+            {
+                float duration = 0.5f;
+
+                for (int i = _activeAmebaScales.Count - 1; i >= 0; i--)
+                {
+                    var (ameba, elapsedTime) = _activeAmebaScales[i];
+
+                    if (ameba == null)
+                    {
+                        _activeAmebaScales.RemoveAt(i);
+                        continue;
+                    }
+
+                    elapsedTime += Time.deltaTime;
+                    Vector3 originalScale = Vector3.one;
+                    Vector3 targetScale = Vector3.one * 1.5f;
+                    ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+
+                    if (elapsedTime >= duration)
+                    {
+                        _activeAmebaScales.RemoveAt(i);
+                    }
+                    else
+                    {
+                        _activeAmebaScales[i] = (ameba, elapsedTime);
+                    }
+                }
+            }
+
 
 
             private IEnumerator ShootAmeba(GameObject ameba)
@@ -317,6 +375,5 @@ namespace GamePlay.Controllers
                 _rb.linearVelocity = _movement * speed;
             }
         #endregion
-
     }
 }

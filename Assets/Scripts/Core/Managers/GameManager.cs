@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace Core.Managers
         public string _attackName = "simple";
         
         public int _attackLevel = 1;
+        
+        public event Action OnCollectPowerUp;
         
         #endregion
     
@@ -77,6 +80,10 @@ namespace Core.Managers
         }
 
         #endregion
-    
+
+        public void OnOnCollectPowerUp()
+        {
+            OnCollectPowerUp?.Invoke();
+        }
     }
 }
