@@ -18,6 +18,10 @@ namespace Core.Managers
 
         [HideInInspector]
         public float timer = 0f;
+
+        public string _attackName = "simple";
+        
+        public int _attackLevel = 1;
         
         #endregion
     

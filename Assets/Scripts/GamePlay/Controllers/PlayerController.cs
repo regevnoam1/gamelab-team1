@@ -74,46 +74,7 @@ namespace GamePlay.Controllers
             TickTok();
         }
 
-        private void TickTok()
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= shootCooldown)
-            {
-                _canShoot = true;
-            }
-
-        }
-
-        private void TryShoot()
-        {
-            if (_canShoot && _pullingDirection.magnitude > 0.5f)
-            {
-                Debug.Log("Shoot!");
-                _canShoot = false;
-                timer = 0f;
-                SpawnAmeba();
-            }
-        }
-
-        private void TryRenderLine()
-        {
-            // Update LineRenderer to show the ray
-            if (_isPullingLever)
-            {
-                UpdateTriangle();
-            }
-            else
-            {
-                _triangleInstance.SetActive(false);
-            }
-        }
-
-        private void TryMove()
-        {
-            // Handle player movement
-            _rb.linearVelocity = _movement * speed;
-        }
+        
 
         #endregion
 
@@ -146,106 +107,216 @@ namespace GamePlay.Controllers
         #endregion
 
         #region Triangle Indicator
-        private void ConfigureTriangle()
-        {
-            if (trianglePrefab != null)
+            private void ConfigureTriangle()
             {
-                _triangleInstance = Instantiate(trianglePrefab, transform.position, Quaternion.identity);
-                _triangleInstance.SetActive(false); // Initially hide the triangle
+                if (trianglePrefab != null)
+                {
+                    _triangleInstance = Instantiate(trianglePrefab, transform.position, Quaternion.identity);
+                    _triangleInstance.SetActive(false); // Initially hide the triangle
+                }
             }
-        }
 
-        private void UpdateTriangle()
-        {
-            if (_triangleInstance == null) return;
-
-            _triangleInstance.SetActive(true);
-
-            // Set position and rotation
-            _triangleInstance.transform.position = transform.position + (Vector3)(_pullingDirection.normalized * triangleDistance);
-            float angle = Mathf.Atan2(_pullingDirection.y, _pullingDirection.x) * Mathf.Rad2Deg;
-            _triangleInstance.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        }
-
-        private void SpawnAmeba()
-        {
-            GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
-            // attach the ameba to the player using fixed joint
-            FixedJoint2D joint = ameba.AddComponent<FixedJoint2D>();
-            joint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
-            StartCoroutine(ShootAmeba(ameba));
-        }
-
-        private IEnumerator ShootAmeba(GameObject ameba)
-        {
-            // enlarge the ameba over one second to 1 size
-            float elapsedTime = 0;
-            float duration = 0.5f;
-            Vector3 originalScale = ameba.transform.localScale;
-            Vector3 targetScale = Vector3.one * 1.5f;
-            while (elapsedTime < duration)
+            private void UpdateTriangle()
             {
-                ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
+                if (_triangleInstance == null) return;
+
+                _triangleInstance.SetActive(true);
+                
+                // Set position and rotation
+                _triangleInstance.transform.position = transform.position + (Vector3)(_movement.normalized * triangleDistance);
+                float angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg;
+                _triangleInstance.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
             }
-            // detach the ameba from the player
-            Destroy(ameba.GetComponent<FixedJoint2D>());
-            // then shoot it in the direction of the lever
-            ameba.GetComponent<Rigidbody2D>().AddForce(_pullingDirection * pullingForce * pullingForce, ForceMode2D.Impulse);
-            // make sure the ameba will stay with that force without being affected
-            ameba.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        }
 
         #endregion
-        
-        public void ChangeColorTemporarily(Color color, float duration)
-        {
-            // Find the child GameObject with the SpriteShapeRenderer
-            SpriteShapeRenderer spriteShapeRenderer = GetComponentInChildren<SpriteShapeRenderer>();
-            if (spriteShapeRenderer == null)
+
+        #region Other Methods
+            
+            private void SpawnAmebas()
             {
-                Debug.LogWarning("SpriteShapeRenderer not found on the player's child!");
-                return;
+                List<GameObject> amebas = new List<GameObject>();
+                for (int i = 0; i < GameManager.Instance._attackLevel; i++)
+                {
+                    GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
+                    FixedJoint2D joint = ameba.AddComponent<FixedJoint2D>();
+                    joint.connectedBody = gameObject.GetComponent<Rigidbody2D>();
+                    amebas.Add(ameba);
+                }
+
+                switch (GameManager.Instance._attackName)
+                {
+                    case "simple":
+                        StartCoroutine(ShootSimple(amebas));
+                        break;
+                }
+                
             }
 
-            // Start the coroutine to change the color temporarily
-            StartCoroutine(ChangeSpriteShapeColorCoroutine(spriteShapeRenderer, color, duration));
-        }
-
-        private IEnumerator ChangeSpriteShapeColorCoroutine(SpriteShapeRenderer spriteShapeRenderer, Color color, float duration)
-        { 
-            audioSource.Play();
-            RumbleManager.instance.Rumble(0.25f,1f,0.25f);
-            // Get the fill material from the SpriteShapeRenderer
-            Material fillMaterial = spriteShapeRenderer.materials[0];
-
-            if (fillMaterial == null)
+            private IEnumerator ShootSimple(List<GameObject> amebas)
             {
-                Debug.LogWarning("Fill material not found on the SpriteShapeRenderer!");
-                yield break;
+                // Generate shooting directions with even angles between them
+                int count = amebas.Count;
+                
+
+                // Iterate over each ameba to animate and shoot them
+                for (int i = 0; i < amebas.Count; i++)
+                {
+                    GameObject ameba = amebas[i];
+
+                    // Animate ameba (scaling up)
+                    float elapsedTime = 0f;
+                    float duration = 0.5f;
+                    Vector3 originalScale = ameba.transform.localScale;
+                    Vector3 targetScale = Vector3.one * 1.5f;
+
+                    while (elapsedTime < duration)
+                    {
+                        ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+                        elapsedTime += Time.deltaTime;
+                        yield return null;
+                    }
+                }
+
+                Vector2[] directions = new Vector2[count];
+                float angleIncrement = 60f / count; // Evenly spaced angles in a circle
+                float mainAngle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg + (((float)amebas.Count / 2f) * angleIncrement); // Main movement angle
+
+                for (int i = 0; i < count; i++)
+                {
+                    float angle = mainAngle + i * angleIncrement;
+                    float radian = angle * Mathf.Deg2Rad;
+                    directions[i] = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
+                }
+                
+                for (int i = 0; i < amebas.Count; i++)
+                {
+                    GameObject ameba = amebas[i];
+                    
+                    // Detach the ameba from the player
+                    Destroy(ameba.GetComponent<FixedJoint2D>());
+
+                    // Apply shooting logic (e.g., apply force or set velocity)
+                    Rigidbody2D rb = ameba.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        float shootingForce = speed * 2; // Adjust as needed
+                        rb.linearVelocity = directions[i] * shootingForce;
+                    }
+                }
             }
 
-            // Store the original color of the fill material
-            Color originalColor = fillMaterial.color;
 
-            // Calculate the interval for each flash
-            int flashCount = 3; // Number of flashes
-            float interval = duration / (flashCount * 2); // Time per color change
-
-            for (int i = 0; i < flashCount; i++)
+            private IEnumerator ShootAmeba(GameObject ameba)
             {
-                // Change to the specified color
-                fillMaterial.color = color;
-                yield return new WaitForSeconds(interval);
+                // enlarge the ameba over one second to 1 size
+                float elapsedTime = 0;
+                float duration = 0.5f;
+                Vector3 originalScale = ameba.transform.localScale;
+                Vector3 targetScale = Vector3.one * 1.5f;
+                while (elapsedTime < duration)
+                {
+                    ameba.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                // detach the ameba from the player
+                Destroy(ameba.GetComponent<FixedJoint2D>());
+                // then shoot it in the direction of the lever
+                ameba.GetComponent<Rigidbody2D>().AddForce(_pullingDirection * pullingForce * pullingForce, ForceMode2D.Impulse);
+                // make sure the ameba will stay with that force without being affected
+                ameba.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            }
+            
+            public void ChangeColorTemporarily(Color color, float duration)
+            {
+                // Find the child GameObject with the SpriteShapeRenderer
+                SpriteShapeRenderer spriteShapeRenderer = GetComponentInChildren<SpriteShapeRenderer>();
+                if (spriteShapeRenderer == null)
+                {
+                    Debug.LogWarning("SpriteShapeRenderer not found on the player's child!");
+                    return;
+                }
 
-                // Revert to the original color
+                // Start the coroutine to change the color temporarily
+                StartCoroutine(ChangeSpriteShapeColorCoroutine(spriteShapeRenderer, color, duration));
+            }
+
+            private IEnumerator ChangeSpriteShapeColorCoroutine(SpriteShapeRenderer spriteShapeRenderer, Color color, float duration)
+            { 
+                audioSource.Play();
+                RumbleManager.instance.Rumble(0.25f,1f,0.25f);
+                // Get the fill material from the SpriteShapeRenderer
+                Material fillMaterial = spriteShapeRenderer.materials[0];
+
+                if (fillMaterial == null)
+                {
+                    Debug.LogWarning("Fill material not found on the SpriteShapeRenderer!");
+                    yield break;
+                }
+
+                // Store the original color of the fill material
+                Color originalColor = fillMaterial.color;
+
+                // Calculate the interval for each flash
+                int flashCount = 3; // Number of flashes
+                float interval = duration / (flashCount * 2); // Time per color change
+
+                for (int i = 0; i < flashCount; i++)
+                {
+                    // Change to the specified color
+                    fillMaterial.color = color;
+                    yield return new WaitForSeconds(interval);
+
+                    // Revert to the original color
+                    fillMaterial.color = originalColor;
+                    yield return new WaitForSeconds(interval);
+                }
+
+                // Ensure it ends with the original color
                 fillMaterial.color = originalColor;
-                yield return new WaitForSeconds(interval);
+            }
+            
+            private void TickTok()
+            {
+                timer += Time.deltaTime;
+
+                if (timer >= shootCooldown)
+                {
+                    _canShoot = true;
+                }
+
             }
 
-            // Ensure it ends with the original color
-            fillMaterial.color = originalColor;
-        }
+            private void TryShoot()
+            {
+                if (_canShoot && _movement.magnitude > 0.3f)
+                {
+                    Debug.Log("Shoot!");
+                    _canShoot = false;
+                    timer = 0f;
+                    SpawnAmebas();
+                }
+            }
+
+            private void TryRenderLine()
+            {
+                if (_movement.magnitude > 0)
+                {
+                    UpdateTriangle();
+                }
+                else
+                {
+                    _triangleInstance.SetActive(false);
+                }
+                
+            }
+
+            private void TryMove()
+            {
+                // Handle player movement
+                _rb.linearVelocity = _movement * speed;
+            }
+        #endregion
+
     }
 }
