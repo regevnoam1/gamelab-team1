@@ -43,7 +43,9 @@ namespace GamePlay.Controllers
         private List<Vector3> _snakePositions = new List<Vector3>();
         private List<GameObject> _snakeAmebas = new List<GameObject>();
         private int _gap = 50;
-
+        private Vector2 currentVelocity;
+        [SerializeField] private float acceleration = -3;
+        [SerializeField] private float maxSpeed = 10;
 
         #endregion
 
@@ -134,6 +136,15 @@ namespace GamePlay.Controllers
                 _isPullingLever = false;
             }
         }
+        
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (!context.canceled)
+            {
+                Debug.Log("Dash!");
+                Dash();
+            }
+        }
     
         #endregion
 
@@ -187,7 +198,20 @@ namespace GamePlay.Controllers
                 GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
                 _snakeAmebas.Add(ameba);
             }
-            
+
+            private void Dash()
+            {
+                _rb.AddForce(_movement * maxSpeed * 5, ForceMode2D.Impulse);
+            }
+
+            private IEnumerator HaltAcceleration()
+            {
+                var lastAcceleration = acceleration;
+                acceleration = 0;
+                yield return new WaitForSeconds(0.5f);
+                acceleration = lastAcceleration;
+            }
+
 
             private void ShootSimple(List<GameObject> amebas)
             {
@@ -371,8 +395,9 @@ namespace GamePlay.Controllers
 
             private void TryMove()
             {
-                // Handle player movement
-                _rb.linearVelocity = _movement * speed;
+                // currentVelocity = Vector2.Lerp(currentVelocity, _movement * speed, Time.deltaTime * acceleration);
+                // _rb.linearVelocity = currentVelocity;
+                _rb.AddForce(_movement * speed, ForceMode2D.Force);
             }
         #endregion
     }
