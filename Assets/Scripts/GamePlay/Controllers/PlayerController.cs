@@ -12,41 +12,46 @@ namespace GamePlay.Controllers
     public class PlayerController : MonoBehaviour
     {
         #region Fields
+        [Header("Aiming Arrow Configuration")]
         [SerializeField] private GameObject trianglePrefab; // Drag and drop a prefab in the inspector
         private GameObject _triangleInstance;
         [SerializeField] private float triangleDistance = 2f; // Distance from player to triangle
         [SerializeField] private float triangleSize = 1f; // Size of the triangle
         
+        
         // Movement variables
-        private Vector2 _movement;
+        [Header("Movement Configuration")]
         [SerializeField]
         private float speed = 10f;
+        [SerializeField] 
+        private float pullingForce = 3f;
+        private Vector2 _movement;
+        
         private Rigidbody2D _rb;
         private readonly List<GameObject> _points = new List<GameObject>();
-        [SerializeField] private float pullingForce = 3f;
         private Vector2 _pullingDirection;
         private bool _isPullingLever = false; // Flag to track lever pulling
 
         // LineRenderer configuration
         private LineRenderer _lineRenderer;
-        [SerializeField] private GameObject amebaPrefab;
     
+        [Header("Shooting Configuration")]
         // Shooting parameters
+        [SerializeField] private GameObject amebaPrefab;
+        [SerializeField] private float shootCooldown = 5f;
+        
         private readonly List<(GameObject ameba, float elapsedTime)> _activeAmebaScales = new List<(GameObject, float)>();
         private bool _canShoot = true;
         private float timer = 0f;
-        [SerializeField] private float shootCooldown = 5f;
         private Gamepad _pad;
         [SerializeField] private AudioSource audioSource;
-        
-        // Snake Attack
-        private List<Vector3> _snakePositions = new List<Vector3>();
-        private List<GameObject> _snakeAmebas = new List<GameObject>();
-        private int _gap = 50;
-        private Vector2 currentVelocity;
-        [SerializeField] private float acceleration = -3;
-        [SerializeField] private float maxSpeed = 10;
 
+        [Header("Dash Configuration")]
+        // Dashing parameters
+        [SerializeField] private float dashSpeed = 10f;
+        [SerializeField] private float dashDuration = 0.5f;
+        private bool _isDashing = false;
+        
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -61,7 +66,6 @@ namespace GamePlay.Controllers
             // Add points from the children if their tag is "Point"
             StartCoroutine(InitPoints());
             
-            GameManager.Instance.OnCollectPowerUp += SnakeAttack;
         }
 
         private IEnumerator InitPoints()
@@ -78,36 +82,35 @@ namespace GamePlay.Controllers
 
         private void Update()
         {
-            TryMove();
-
             TryRenderLine();
+            
+            if (_isDashing)
+            {
+                return;
+            }
+
 
             if (GameManager.Instance._attackName == "simple")
             {
                 TryShoot();
                 UpdateScalingAmebas();
             }
-            else if (GameManager.Instance._attackName == "snake")
-            {
-                UpdateSnakePositions();
-            }
 
             TickTok();
 
         }
-
-        private void UpdateSnakePositions()
+        
+        private void FixedUpdate()
         {
-            _snakePositions.Insert(0, transform.position);
-            int index = 0;
-            foreach (var ameba in _snakeAmebas)
+            if (_isDashing)
             {
-                Vector3 direction = _snakePositions[Mathf.Min(index * _gap, _snakePositions.Count - 1)];
-                ameba.transform.position = direction;
-                Debug.Log($"Ameba {index} position: {ameba.transform.position}");
-                index++;
+                return;
             }
+            
+            TryMove();
+
         }
+        
 
         #endregion
 
@@ -139,10 +142,10 @@ namespace GamePlay.Controllers
         
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (!context.canceled)
+            if (context.started)
             {
                 Debug.Log("Dash!");
-                Dash();
+                StartCoroutine(Dash());
             }
         }
     
@@ -193,23 +196,12 @@ namespace GamePlay.Controllers
                 
             }
 
-            private void SnakeAttack()
+            private IEnumerator Dash()
             {
-                GameObject ameba = Instantiate(amebaPrefab, transform.position, Quaternion.identity);
-                _snakeAmebas.Add(ameba);
-            }
-
-            private void Dash()
-            {
-                _rb.AddForce(_movement * maxSpeed * 5, ForceMode2D.Impulse);
-            }
-
-            private IEnumerator HaltAcceleration()
-            {
-                var lastAcceleration = acceleration;
-                acceleration = 0;
-                yield return new WaitForSeconds(0.5f);
-                acceleration = lastAcceleration;
+                _isDashing = true;
+                _rb.AddForce(_movement * dashSpeed * 5, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(dashDuration);
+                _isDashing = false;
             }
 
 
@@ -395,10 +387,9 @@ namespace GamePlay.Controllers
 
             private void TryMove()
             {
-                // currentVelocity = Vector2.Lerp(currentVelocity, _movement * speed, Time.deltaTime * acceleration);
-                // _rb.linearVelocity = currentVelocity;
-                _rb.AddForce(_movement * speed, ForceMode2D.Force);
+                _rb.linearVelocity = _movement * speed;
             }
+            
         #endregion
     }
 }
